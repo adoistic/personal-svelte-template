@@ -1,21 +1,23 @@
 # Sveltia CMS configuration.
 #
+# Auth: this template uses Netlify Identity + Git Gateway, the no-code path.
+#
 # After forking this template:
 #   1. Replace OWNER/REPO below with your GitHub repo (e.g. yourname/your-site).
 #   2. Update site_url and display_url with your deployed URL.
-#   3. If hosting on Netlify, you're done — Sveltia uses its built-in
-#      GitHub OAuth flow automatically.
-#   4. If hosting on Vercel/Cloudflare/GitHub Pages, set up the auth proxy
-#      and add `auth_endpoint:` under `backend:` pointing at it.
-#      See: https://github.com/sveltia/sveltia-cms-auth
+#   3. In your Netlify dashboard:
+#      - Site configuration → Identity → Enable Identity
+#      - Identity → Services → Git Gateway → Enable
+#      - Identity → Invite users → invite yourself with your email
+#   4. Check your email → set a password → visit /admin → log in.
 #
-# The Resume page lives at /content/resume.json and is edited directly via
-# GitHub's web UI (paste-the-JSON workflow). See docs/resume-import.md.
+# Direct "Login with your GitHub account" (no Netlify Identity middle-step)
+# is planned — see ROADMAP.md.
 
 backend:
-  name: github
-  repo: OWNER/REPO
+  name: git-gateway
   branch: main
+  repo: OWNER/REPO
   commit_messages:
     create: 'content: create {{collection}} "{{slug}}"'
     update: 'content: update {{collection}} "{{slug}}"'

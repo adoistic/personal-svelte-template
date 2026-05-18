@@ -289,11 +289,36 @@ After the content is in place:
 
 1. Push the user's commits to their GitHub repo.
 2. Update `static/admin/config.yml` — replace `OWNER/REPO` with their
-   actual GitHub path (e.g. `janedoe/janedoe-site`).
+   actual GitHub path (e.g. `janedoe/janedoe-site`). Commit and push.
 3. Walk them through: Netlify → "Import from GitHub" → pick the repo.
    Netlify auto-detects SvelteKit and deploys.
-4. The `/admin` page on the live site lets them edit through Sveltia CMS
-   going forward.
+
+### Enabling the CMS login (one-time Netlify Identity setup)
+
+The `/admin` page will be deployed, but login won't work until you turn on
+Netlify Identity + Git Gateway. This is the no-code path — every step
+happens in the Netlify dashboard. About 2 minutes:
+
+1. Netlify dashboard → your site → **Site configuration** → **Identity** →
+   **Enable Identity**.
+2. Same page → **Services** → **Git Gateway** → **Enable Git Gateway**.
+   (This is what lets Identity users commit to the GitHub repo.)
+3. Same page → **Registration preferences** → set to **Invite only** unless
+   you want anyone to be able to request access.
+4. **Identity tab** → **Invite users** → enter your email → invite.
+5. Check your inbox → click the magic link → set a password.
+6. Visit `https://your-site.netlify.app/admin` → log in with your email +
+   password → you're in.
+
+The Identity widget on the main site only loads when an Identity token is
+in the URL hash (i.e. someone clicked the email magic link). Regular
+visitors never download it — no JS overhead, no privacy concern.
+
+### Future: direct "Login with GitHub" button
+
+The template will eventually ship a direct GitHub OAuth path (no Netlify
+Identity middle-step) via a Cloudflare Worker. Tracked in `ROADMAP.md`.
+For now, Netlify Identity is the simplest working path.
 
 ---
 
