@@ -85,6 +85,62 @@ in the rendered HTML.
 Newsreader + IBM Plex setup), `tech` (mono + sans), `minimal` (system
 only). Each preset bundles its font choices and accent color recommendations.
 
+### Template variants — developer, designer, author
+
+Right now the template is shaped for a writer/author. The structure
+(Profile → Books → Writings → Resume → Blog) makes sense for someone who
+publishes long-form work. For other professions, the same foundation should
+support different default sections.
+
+**Developer variant.** The default sections become:
+
+- Profile → Skills (standalone) → Projects → Resume → Blog
+- "Skills" gets pulled out of `resume.json` into its own first-class section
+  (`content/skills.json`) and renders as a top-level page.
+- "Projects" becomes a folder collection (`content/projects/*.json`), with
+  fields for repo URL, demo URL, screenshots, tech stack, role.
+- Resume keeps everything else (work, education, certs).
+- Could integrate live data: GitHub contribution graph, latest npm packages,
+  star counts — opt-in via `site.json`.
+
+**Designer variant.** The default sections become:
+
+- Profile → Portfolio → Case studies → Clients → Blog
+- "Portfolio" is image-heavy: each project is a folder with a hero image,
+  a gallery, a short description. (`content/portfolio/<slug>/index.md` +
+  images alongside.)
+- "Case studies" are long-form posts about specific projects — same
+  structure as blog but visually distinct (larger images, less text).
+- "Clients" is a simple list of logos / names.
+
+**The Skills section is portable.** Even non-developers benefit from it
+(languages spoken, instruments played, technical specialties). The plan is
+to make it a section that any variant can include:
+
+- `content/skills.json` with a simple shape (`[{ name, level?, keywords[] }]`)
+- Auto-hides if empty, same as every other section
+- Can render on its own page (`/skills`) AND optionally as a section on the
+  home page (controlled by a `site.json` flag like `showSkillsOnHome: true`)
+
+**Implementation plan:**
+
+- Step 1: Lift Skills out of `resume.json` into `content/skills.json`. Add
+  a `/skills` route. Backwards-compatible: if `skills.json` is missing,
+  read from `resume.json` as before.
+- Step 2: Add a `template_variant` field to `site.json` (`author` |
+  `developer` | `designer`). The build reads this to decide which seed
+  content shipping, which sections appear by default, and which Sveltia
+  collections are active.
+- Step 3: Build the developer variant's seed content. Document the
+  switch-variant workflow in CLAUDE.md so an LLM can scaffold a developer
+  site from "I'm a backend engineer working at X, here's my GitHub."
+- Step 4: Same for the designer variant. Image-handling is the harder
+  piece — designers will want large, optimized hero images, which depends
+  on the image-pipeline mid-term item shipping first.
+
+Each variant should share the same accessibility / SEO / OG / theme-toggle
+foundation. Only the default sections and seed content differ.
+
 ## Far-term
 
 ### Cloudflare Pages + GitHub Pages first-class support
