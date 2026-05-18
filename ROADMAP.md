@@ -152,14 +152,11 @@ To make scaffolding fast for common profiles, document _starting-point
 recipes_ in CLAUDE.md — not a `template_variant` field, just suggested
 prompts that an LLM can use to set up a coherent default for someone:
 
-- "Set me up as a writer" → populate profile + books + writings + resume,
-  leave projects/portfolio empty (auto-hide).
-- "Set me up as a developer" → populate profile + skills + projects +
-  resume, leave books/portfolio empty.
-- "Set me up as a designer" → populate profile + portfolio + case studies
-  - resume, leave books/projects empty.
-- "Set me up as a developer who also writes" → populate all of the above
-  except portfolio.
+- "Set me up as a writer" → populate profile, books, writings, resume; leave projects/portfolio empty (auto-hide).
+- "Set me up as a developer" → populate profile, skills, projects, resume; leave books/portfolio empty.
+- "Set me up as a designer" → populate profile, portfolio, case studies, resume; leave books/projects empty.
+- "Set me up as a developer who also writes" → populate everything above except portfolio.
+- "Hybrid" → any combination. Designer with books, novelist with code projects, professor with portfolio. No section is exclusive to a profile.
 
 The user can mix any of these later by adding files to other folders.
 Nothing is gated. This is the right shape because the underlying
