@@ -15,7 +15,7 @@
 	}
 </script>
 
-<article class="section container">
+<article class="section shell">
 	<header class="post-header">
 		<h1>{post.title}</h1>
 		<p class="muted">

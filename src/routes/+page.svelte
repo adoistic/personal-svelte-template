@@ -11,7 +11,7 @@
 	}
 </script>
 
-<section class="hero container" aria-labelledby="profile-heading">
+<section class="hero shell" aria-labelledby="profile-heading">
 	<div class="hero-grid">
 		{#if profile.photo}
 			<img
@@ -50,7 +50,7 @@
 </section>
 
 {#if sections.blog && recentPosts.length > 0}
-	<section class="section container" aria-labelledby="recent-heading">
+	<section class="section shell" aria-labelledby="recent-heading">
 		<h2 id="recent-heading">Recent writing</h2>
 		<ul class="post-preview-list">
 			{#each recentPosts as post (post.slug)}

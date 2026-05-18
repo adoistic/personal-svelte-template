@@ -5,7 +5,7 @@
 	let { books } = $derived(data);
 </script>
 
-<article class="section container">
+<article class="section shell">
 	<h1>Books</h1>
 	<ul class="book-list">
 		{#each books as book (book.title)}

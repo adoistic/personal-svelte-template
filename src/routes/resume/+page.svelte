@@ -10,7 +10,7 @@
 	}
 </script>
 
-<article class="section container">
+<article class="section shell">
 	<h1>Resume</h1>
 
 	{#if resume.basics?.label}

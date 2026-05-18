@@ -3,7 +3,7 @@
 	let { writings } = $derived(data);
 </script>
 
-<article class="section container">
+<article class="section shell">
 	<h1>Writings</h1>
 	<p class="muted lead">External essays, articles, and interviews — published elsewhere.</p>
 	<ul class="writing-list">

@@ -3,7 +3,7 @@
 	import { resolve } from '$app/paths';
 </script>
 
-<article class="section container">
+<article class="section shell">
 	<h1>{page.status} — Page not found</h1>
 	<p class="muted">
 		{page.error?.message ?? 'The page you are looking for does not exist or has moved.'}

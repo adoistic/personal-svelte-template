@@ -67,7 +67,7 @@
 <a href="#main" class="skip-link">Skip to main content</a>
 
 <header class="site-header">
-	<div class="container-wide site-header-inner">
+	<div class="shell site-header-inner">
 		<a href={resolve('/')} class="site-name" aria-label="{site.title}, home">{site.title}</a>
 		<nav aria-label="Primary" class="primary-nav">
 			<ul class="nav-list">
@@ -92,7 +92,7 @@
 </main>
 
 <footer class="site-footer">
-	<div class="container-wide footer-inner">
+	<div class="shell footer-inner">
 		<div class="footer-text">
 			<p class="footer-line">© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
 			<p class="footer-line footer-credit">

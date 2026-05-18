@@ -10,7 +10,7 @@
 	}
 </script>
 
-<article class="section container">
+<article class="section shell">
 	<h1>Blog</h1>
 	<ul class="post-list">
 		{#each posts as post (post.slug)}

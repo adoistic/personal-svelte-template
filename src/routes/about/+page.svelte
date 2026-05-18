@@ -5,7 +5,7 @@
 	let { profile } = $derived(data);
 </script>
 
-<article class="section container">
+<article class="section shell">
 	<h1>About</h1>
 	{#if profile.bio}
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
