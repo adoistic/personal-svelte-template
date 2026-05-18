@@ -1,13 +1,11 @@
 import profileRaw from '../../content/profile.json';
 import siteRaw from '../../content/site.json';
-import booksRaw from '../../content/books.json';
-import writingsRaw from '../../content/writings.json';
 import resumeRaw from '../../content/resume.json';
 
 import { ProfileSchema, type Profile } from './schemas/profile';
 import { SiteSchema, type Site } from './schemas/site';
-import { BooksSchema, type Book } from './schemas/books';
-import { WritingsSchema, type Writing } from './schemas/writings';
+import { BookSchema, type Book } from './schemas/books';
+import { WritingSchema, type Writing } from './schemas/writings';
 import { ResumeSchema, type Resume } from './schemas/resume';
 import { BlogFrontmatterSchema, type BlogPostMeta } from './schemas/blog';
 
@@ -37,17 +35,39 @@ export function getSite(): Site {
 	return result.data;
 }
 
-// --- Optional sections (graceful degrade to empty) -----------------------
+// --- Books (folder collection: content/books/*.json) ---------------------
+
+const bookFiles = import.meta.glob<{ default: unknown }>('/content/books/*.json', {
+	eager: true
+});
 
 export function getBooks(): Book[] {
-	const result = BooksSchema.safeParse(booksRaw);
-	return result.success ? result.data : [];
+	const books: Book[] = [];
+	for (const mod of Object.values(bookFiles)) {
+		const parsed = BookSchema.safeParse(mod.default);
+		if (parsed.success) books.push(parsed.data);
+	}
+	books.sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
+	return books;
 }
 
+// --- Writings (folder collection: content/writings/*.json) ---------------
+
+const writingFiles = import.meta.glob<{ default: unknown }>('/content/writings/*.json', {
+	eager: true
+});
+
 export function getWritings(): Writing[] {
-	const result = WritingsSchema.safeParse(writingsRaw);
-	return result.success ? result.data : [];
+	const writings: Writing[] = [];
+	for (const mod of Object.values(writingFiles)) {
+		const parsed = WritingSchema.safeParse(mod.default);
+		if (parsed.success) writings.push(parsed.data);
+	}
+	writings.sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
+	return writings;
 }
+
+// --- Resume (single file: content/resume.json) ---------------------------
 
 export function getResume(): Resume {
 	const result = ResumeSchema.safeParse(resumeRaw);

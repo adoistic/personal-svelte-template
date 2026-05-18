@@ -20,13 +20,16 @@ This one:
 
 ## Quick start (Netlify, ~30 min, no CLI)
 
-1. Click **Use this template** at the top of this repo → create your own copy.
-2. Sign in to [Netlify](https://app.netlify.com/) → "Import from GitHub" → pick your new repo.
-3. Wait for the first build (~1 minute). You now have a live site.
-4. Open `https://<your-site>.netlify.app/admin` → sign in with GitHub → start editing.
-5. (Optional) Connect your custom domain in Netlify's DNS settings.
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/adoistic/personal-svelte-template)
 
-Other hosts (Vercel, Cloudflare Pages, GitHub Pages) work but require a one-time OAuth proxy setup. Docs for those hosts will land in v0.2.
+1. Click **Use this template** at the top of this repo → create your own copy.
+2. Sign in to [Netlify](https://app.netlify.com/) → "Import from GitHub" → pick your new repo. (Or use the button above to deploy the template directly, then fork later if you want.)
+3. Wait for the first build (~1 minute). You now have a live site.
+4. Edit `static/admin/config.yml` and replace `OWNER/REPO` with your GitHub repo path (e.g. `yourname/your-site`). Commit.
+5. Open `https://<your-site>.netlify.app/admin` → sign in with GitHub → start editing.
+6. (Optional) Connect your custom domain in Netlify's DNS settings.
+
+Other hosts (Vercel, Cloudflare Pages, GitHub Pages) work but require a one-time OAuth proxy setup — see [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth). Full advanced-host docs will land in v0.2.
 
 ## What you can edit
 
@@ -42,7 +45,7 @@ Through the admin UI:
 
 ## The LLM-powered resume import
 
-Don't want to type your resume into a form? Drop your resume PDF or text into Claude or ChatGPT with a pre-written prompt (will ship under `docs/resume-import.md`). You'll get back valid [JSON Resume](https://jsonresume.org/schema/). Paste it into the admin UI's Resume page. Done.
+Don't want to type your resume into a form? See [`docs/resume-import.md`](docs/resume-import.md) for a pre-written prompt — drop your resume into Claude/ChatGPT/Gemini, copy the JSON it gives back, paste it into `content/resume.json` via GitHub's web UI. About 30 seconds end-to-end. Conforms to the [JSON Resume schema](https://jsonresume.org/schema/).
 
 ## Tech stack
 

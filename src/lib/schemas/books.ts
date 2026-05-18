@@ -14,6 +14,4 @@ export const BookSchema = z.object({
 	links: z.array(BookLinkSchema).default([])
 });
 
-export const BooksSchema = z.array(BookSchema);
-
 export type Book = z.infer<typeof BookSchema>;

@@ -1,0 +1,191 @@
+# Sveltia CMS configuration.
+#
+# After forking this template:
+#   1. Replace OWNER/REPO below with your GitHub repo (e.g. yourname/your-site).
+#   2. Update site_url and display_url with your deployed URL.
+#   3. If hosting on Netlify, you're done — Sveltia uses its built-in
+#      GitHub OAuth flow automatically.
+#   4. If hosting on Vercel/Cloudflare/GitHub Pages, set up the auth proxy
+#      and add `auth_endpoint:` under `backend:` pointing at it.
+#      See: https://github.com/sveltia/sveltia-cms-auth
+#
+# The Resume page lives at /content/resume.json and is edited directly via
+# GitHub's web UI (paste-the-JSON workflow). See docs/resume-import.md.
+
+backend:
+  name: github
+  repo: OWNER/REPO
+  branch: main
+  commit_messages:
+    create: 'content: create {{collection}} "{{slug}}"'
+    update: 'content: update {{collection}} "{{slug}}"'
+    delete: 'content: delete {{collection}} "{{slug}}"'
+    uploadMedia: 'content: upload "{{path}}"'
+    deleteMedia: 'content: delete "{{path}}"'
+
+site_url: https://example.com
+display_url: https://example.com
+
+media_folder: static/images
+public_folder: /images
+
+collections:
+  # --- Profile (singleton file) ------------------------------------------
+  - name: profile
+    label: Profile
+    description: 'Your name, bio, photo, and social links. Required.'
+    delete: false
+    files:
+      - name: profile
+        label: Profile
+        file: content/profile.json
+        format: json
+        fields:
+          - { name: name, label: 'Name', widget: string, required: true }
+          - { name: tagline, label: 'Tagline', widget: string, required: false }
+          - { name: bio, label: 'Bio', widget: markdown, required: false }
+          - { name: photo, label: 'Photo', widget: image, required: false }
+          - {
+              name: photoAlt,
+              label: 'Photo alt text',
+              widget: string,
+              required: false,
+              hint: 'Describe the photo for screen readers. Required if you upload a photo.'
+            }
+          - { name: location, label: 'Location', widget: string, required: false }
+          - { name: email, label: 'Email', widget: string, required: false }
+          - name: social
+            label: 'Social links'
+            widget: list
+            required: false
+            fields:
+              - { name: platform, label: 'Platform', widget: string, required: true }
+              - { name: url, label: 'URL', widget: string, required: true }
+              - {
+                  name: label,
+                  label: 'Display label',
+                  widget: string,
+                  required: false,
+                  hint: 'What appears as link text. Defaults to platform if blank.'
+                }
+
+  # --- Site (singleton file) ---------------------------------------------
+  - name: site
+    label: Site
+    description: 'Title, description, URL, and accent color.'
+    delete: false
+    files:
+      - name: site
+        label: Site
+        file: content/site.json
+        format: json
+        fields:
+          - { name: title, label: 'Site title', widget: string, required: true }
+          - { name: description, label: 'Description', widget: string, required: false }
+          - { name: url, label: 'Site URL', widget: string, required: false }
+          - {
+              name: accent,
+              label: 'Accent color',
+              widget: color,
+              required: false,
+              default: '#0f4c81',
+              hint: 'Hex like #0f4c81. Used for links only — body text always uses high-contrast neutral.'
+            }
+
+  # --- Books (folder: one JSON file per book) ----------------------------
+  - name: books
+    label: Books
+    description: 'Books you have written. Auto-hides if empty.'
+    folder: content/books
+    extension: json
+    format: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: title
+    fields:
+      - { name: title, label: 'Title', widget: string, required: true }
+      - { name: year, label: 'Year', widget: number, required: false, value_type: int }
+      - { name: cover, label: 'Cover image', widget: image, required: false }
+      - {
+          name: coverAlt,
+          label: 'Cover alt text',
+          widget: string,
+          required: false,
+          hint: 'Describe the cover for screen readers.'
+        }
+      - { name: blurb, label: 'Blurb', widget: markdown, required: false }
+      - name: links
+        label: 'Buy / read links'
+        widget: list
+        required: false
+        fields:
+          - { name: label, label: 'Label', widget: string, required: true }
+          - { name: url, label: 'URL', widget: string, required: true }
+
+  # --- Writings (folder: one JSON file per writing) ----------------------
+  - name: writings
+    label: Writings
+    description: 'Essays, articles, and interviews published elsewhere. Auto-hides if empty.'
+    folder: content/writings
+    extension: json
+    format: json
+    create: true
+    slug: '{{slug}}'
+    identifier_field: title
+    fields:
+      - { name: title, label: 'Title', widget: string, required: true }
+      - { name: publisher, label: 'Publisher', widget: string, required: false }
+      - { name: year, label: 'Year', widget: number, required: false, value_type: int }
+      - { name: url, label: 'URL', widget: string, required: true }
+      - { name: excerpt, label: 'Excerpt', widget: text, required: false }
+
+  # --- Blog (folder: one Markdown file per post) -------------------------
+  - name: blog
+    label: Blog
+    description: 'Long-form posts. Markdown with optional cover image. Auto-hides if no posts.'
+    folder: content/blog
+    extension: md
+    format: frontmatter
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { name: title, label: 'Title', widget: string, required: true }
+      - {
+          name: date,
+          label: 'Date',
+          widget: datetime,
+          required: true,
+          date_format: 'YYYY-MM-DD',
+          time_format: false,
+          picker_utc: false
+        }
+      - {
+          name: cover,
+          label: 'Cover image',
+          widget: image,
+          required: false,
+          hint: 'Optional. Card on the blog index shows a larger image layout when present.'
+        }
+      - {
+          name: coverAlt,
+          label: 'Cover alt text',
+          widget: string,
+          required: false,
+          hint: 'Required if you upload a cover. Describe the image for screen readers.'
+        }
+      - {
+          name: excerpt,
+          label: 'Excerpt',
+          widget: text,
+          required: false,
+          hint: 'Optional short summary shown on the blog index card.'
+        }
+      - {
+          name: draft,
+          label: 'Draft',
+          widget: boolean,
+          default: false,
+          required: false,
+          hint: 'Drafts do not appear on the live site.'
+        }
+      - { name: body, label: 'Body', widget: markdown, required: true }

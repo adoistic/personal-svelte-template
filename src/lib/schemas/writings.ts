@@ -8,6 +8,4 @@ export const WritingSchema = z.object({
 	excerpt: z.string().optional()
 });
 
-export const WritingsSchema = z.array(WritingSchema);
-
 export type Writing = z.infer<typeof WritingSchema>;
