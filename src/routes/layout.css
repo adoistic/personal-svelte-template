@@ -33,8 +33,10 @@
 		--line-height-heading: 1.2;
 	}
 
+	/* System dark mode — applies when the user has NOT explicitly chosen
+	   light or dark via the toggle (no data-theme attribute on <html>). */
 	@media (prefers-color-scheme: dark) {
-		:root {
+		:root:not([data-theme='light']) {
 			--color-bg: #0b0b0e;
 			--color-fg: #f4f4f5;
 			--color-muted: #a1a1aa;
@@ -43,6 +45,19 @@
 			--color-accent-fg: #0b0b0e;
 		}
 	}
+
+	/* Explicit overrides via the theme toggle. Take precedence over the
+	   media query above by matching the same specificity but defined later. */
+	:root[data-theme='dark'] {
+		--color-bg: #0b0b0e;
+		--color-fg: #f4f4f5;
+		--color-muted: #a1a1aa;
+		--color-border: #27272a;
+		--color-accent: #7eb8ff;
+		--color-accent-fg: #0b0b0e;
+	}
+
+	/* :root[data-theme='light'] inherits the default light tokens at the top. */
 
 	*,
 	*::before,

@@ -1,0 +1,12 @@
+{
+	"title": "The Quiet Sky",
+	"year": 2025,
+	"cover": "/images/seed/book-1.svg",
+	"coverAlt": "Cover of The Quiet Sky: a pale circle suggesting a moon against a deep blue ground",
+	"blurb": "A debut novel about a librarian who inherits a house in a town she's never been to, and the year she spends figuring out why. Longlisted for the Center for Fiction First Novel Prize.\n\n*\"Unmistakably alive.\"* — **The New York Times**",
+	"links": [
+		{ "label": "Bookshop.org", "url": "https://bookshop.org" },
+		{ "label": "Indiebound", "url": "https://www.indiebound.org" },
+		{ "label": "Publisher", "url": "https://example.com/quiet-sky" }
+	]
+}

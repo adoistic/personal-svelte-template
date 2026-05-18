@@ -1,10 +1,14 @@
 {
-	"name": "Your Name",
-	"tagline": "A short line about who you are",
-	"bio": "Replace this with your own bio. Two or three short paragraphs work best — say what you do, what you care about, and what you're working on right now. The bio is the only thing every visitor will read, so make it specific.\n\nThe template will auto-hide any section that has no content. If you don't have books, the Books page won't render. If you don't have a resume, no Resume link in the nav. The site shapes itself to whoever's using it.",
+	"name": "Avery Morrow",
+	"tagline": "Writer of quiet novels and occasional essays",
+	"bio": "Avery Morrow is a novelist and essayist living somewhere with too many books and not enough shelves. Their debut novel *The Quiet Sky* (Vellum Press, 2025) was longlisted for the Center for Fiction First Novel Prize and called \"unmistakably alive\" by the New York Times.\n\nBefore writing full-time, Avery worked as a librarian and editor. Their essays on grief, attention, and small-town America have appeared in The Paris Review, Granta, The Atlantic, and elsewhere.\n\nThis is a placeholder site. Replace this profile with your own.",
 	"photo": "/images/seed/avatar.svg",
-	"photoAlt": "Placeholder avatar — a simple geometric portrait outline",
-	"location": "",
-	"email": "",
-	"social": []
+	"photoAlt": "Illustrated portrait of Avery Morrow",
+	"location": "Brooklyn, NY",
+	"email": "avery@example.com",
+	"social": [
+		{ "platform": "Bluesky", "url": "https://bsky.app/profile/avery.example.com" },
+		{ "platform": "Are.na", "url": "https://www.are.na/avery-morrow" },
+		{ "platform": "RSS", "url": "https://example.com/rss.xml", "label": "RSS" }
+	]
 }

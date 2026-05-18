@@ -1,5 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Placeholder avatar">
-	<rect width="200" height="200" fill="#e4e4e7" />
-	<circle cx="100" cy="78" r="34" fill="#a1a1aa" />
-	<path d="M40 200 C 40 140, 160 140, 160 200 Z" fill="#a1a1aa" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Illustrated portrait placeholder">
+	<defs>
+		<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0%" stop-color="#f4ede0" />
+			<stop offset="100%" stop-color="#e8dcc2" />
+		</linearGradient>
+		<linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0%" stop-color="#d9b890" />
+			<stop offset="100%" stop-color="#c19f73" />
+		</linearGradient>
+	</defs>
+	<rect width="400" height="400" fill="url(#bg)" />
+	<g>
+		<path d="M 60 400 C 60 290, 140 260, 200 260 C 260 260, 340 290, 340 400 Z" fill="#2c3e50" />
+		<ellipse cx="200" cy="170" rx="90" ry="105" fill="url(#skin)" />
+		<path d="M 110 130 C 110 70, 160 50, 200 50 C 240 50, 290 70, 290 130 C 290 145, 285 158, 278 168 C 270 145, 240 125, 200 125 C 160 125, 130 145, 122 168 C 115 158, 110 145, 110 130 Z" fill="#3a2818" />
+		<circle cx="175" cy="175" r="4" fill="#3a2818" />
+		<circle cx="225" cy="175" r="4" fill="#3a2818" />
+		<path d="M 185 215 Q 200 225, 215 215" stroke="#8a6840" stroke-width="2.5" fill="none" stroke-linecap="round" />
+	</g>
 </svg>

@@ -1,14 +1,70 @@
 {
 	"basics": {
-		"name": "Your Name",
-		"label": "",
-		"summary": "",
-		"location": {},
-		"profiles": []
+		"name": "Avery Morrow",
+		"label": "Novelist and essayist",
+		"email": "avery@example.com",
+		"summary": "Novelist and essayist. Former librarian. Interested in quiet books, the geography of grief, and the slow internet."
 	},
-	"work": [],
-	"education": [],
-	"skills": [],
-	"projects": [],
-	"certificates": []
+	"work": [
+		{
+			"name": "Self-employed",
+			"position": "Novelist",
+			"startDate": "2022-01",
+			"summary": "Writing novels and essays full-time. Debut novel The Quiet Sky published by Vellum Press in 2025.",
+			"highlights": [
+				"Longlisted for the Center for Fiction First Novel Prize (2025)",
+				"Essays published in The Paris Review, Granta, The Atlantic",
+				"Two-novel deal with Vellum Press"
+			]
+		},
+		{
+			"name": "Greenpoint Public Library",
+			"position": "Reference Librarian",
+			"startDate": "2016-09",
+			"endDate": "2021-12",
+			"summary": "Six years on the reference desk at a small-but-busy branch in Brooklyn.",
+			"highlights": [
+				"Designed the local-history collection",
+				"Ran the weekly senior reading group for four years"
+			]
+		},
+		{
+			"name": "Riverhead Books",
+			"position": "Assistant Editor",
+			"startDate": "2014-06",
+			"endDate": "2016-08",
+			"summary": "Editorial assistant on the literary fiction list."
+		}
+	],
+	"education": [
+		{
+			"institution": "Iowa Writers' Workshop",
+			"studyType": "MFA",
+			"area": "Fiction",
+			"startDate": "2012",
+			"endDate": "2014"
+		},
+		{
+			"institution": "Oberlin College",
+			"studyType": "BA",
+			"area": "English Literature",
+			"startDate": "2008",
+			"endDate": "2012"
+		}
+	],
+	"skills": [
+		{
+			"name": "Writing",
+			"keywords": ["Long-form fiction", "Personal essay", "Literary criticism"]
+		},
+		{
+			"name": "Editing",
+			"keywords": ["Developmental editing", "Line editing", "Manuscript critique"]
+		},
+		{
+			"name": "Research",
+			"keywords": ["Archival research", "Oral history", "Local-history collections"]
+		}
+	],
+	"projects": []
 }

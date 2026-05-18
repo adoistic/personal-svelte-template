@@ -2,6 +2,7 @@
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import { page } from '$app/state';
+	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 
 	let { data, children } = $props();
 	let nav = $derived(data.nav);
@@ -41,6 +42,7 @@
 			{/each}
 		</ul>
 	</nav>
+	<ThemeToggle />
 </header>
 
 <main id="main" tabindex="-1">
@@ -54,6 +56,11 @@
 <style>
 	.site-header {
 		padding-block: clamp(1.25rem, 3vw, 2rem);
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		align-items: center;
+		justify-content: space-between;
 	}
 	.nav-list {
 		list-style: none;
