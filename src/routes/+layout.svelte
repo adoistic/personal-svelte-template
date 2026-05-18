@@ -84,7 +84,6 @@
 				{/each}
 			</ul>
 		</nav>
-		<ThemeToggle />
 	</div>
 </header>
 
@@ -94,17 +93,18 @@
 
 <footer class="site-footer">
 	<div class="container-wide footer-inner">
-		<p class="footer-line">© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
-		<p class="footer-line footer-credit">
-			Built with
-			<a href="https://github.com/adoistic/personal-svelte-template" rel="noopener">
-				personal-svelte-template
-			</a>
-			by
-			<a href="https://github.com/adoistic" rel="noopener">Adnan</a>
-			<span aria-hidden="true">·</span>
-			<a href="https://twitter.com/adoistic" rel="noopener">Twitter</a>
-		</p>
+		<div class="footer-text">
+			<p class="footer-line">© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
+			<p class="footer-line footer-credit">
+				Built with
+				<a href="https://github.com/adoistic/personal-svelte-template" rel="noopener">
+					personal-svelte-template
+				</a>
+				by
+				<a href="https://github.com/adoistic" rel="noopener">Adnan</a>
+			</p>
+		</div>
+		<ThemeToggle />
 	</div>
 </footer>
 
@@ -122,8 +122,8 @@
 		padding-block: clamp(0.85rem, 2vw, 1.25rem);
 		display: flex;
 		flex-wrap: wrap;
-		gap: clamp(0.75rem, 2vw, 2rem);
-		align-items: center;
+		gap: clamp(1rem, 3vw, 2.5rem);
+		align-items: baseline;
 		justify-content: space-between;
 	}
 	.site-name {
@@ -187,8 +187,15 @@
 	}
 	.footer-inner {
 		padding-block: var(--space-section);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: 1.5rem;
+	}
+	.footer-text {
 		display: grid;
-		gap: 0.5rem;
+		gap: 0.4rem;
 	}
 	.footer-line {
 		margin: 0;
