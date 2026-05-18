@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { md } from '$lib/markdown';
 
 	let { data } = $props();
 	let { profile, sections, recentPosts } = $derived(data);
@@ -30,11 +31,8 @@
 	</div>
 
 	{#if profile.bio}
-		<div class="prose hero-bio">
-			{#each profile.bio.split(/\n\n+/) as para, i (i)}
-				<p>{para}</p>
-			{/each}
-		</div>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<div class="prose hero-bio">{@html md(profile.bio)}</div>
 	{/if}
 
 	{#if profile.social.length > 0 || profile.email}

@@ -1,3 +1,11 @@
-# allow crawling everything by default
+# Allow all crawlers by default.
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+
+# Machine-readable site map and a human-readable summary for LLMs.
+Sitemap: https://example.com/sitemap.xml
+
+# llms.txt is an emerging convention (llmstxt.org) — a Markdown summary of
+# the site optimized for LLM context. Find it at:
+# https://example.com/llms.txt

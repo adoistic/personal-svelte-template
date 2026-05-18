@@ -1,10 +1,15 @@
 import { error } from '@sveltejs/kit';
-import { getResume, hasResume } from '$lib/content';
+import { getResume, getProfile, hasResume } from '$lib/content';
 
 export const prerender = true;
 
 export function load() {
 	const resume = getResume();
 	if (!hasResume(resume)) throw error(404, 'Not found');
-	return { resume, pageTitle: 'Resume' };
+	const profile = getProfile();
+	return {
+		resume,
+		pageTitle: 'Resume',
+		pageDescription: `Resume of ${profile.name} — ${resume.basics?.label || 'career history, education, and skills'}.`
+	};
 }

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { md } from '$lib/markdown';
+
 	let { data } = $props();
 	let { books } = $derived(data);
 </script>
@@ -23,7 +25,8 @@
 						<p class="muted book-meta"><time datetime={String(book.year)}>{book.year}</time></p>
 					{/if}
 					{#if book.blurb}
-						<p>{book.blurb}</p>
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						<div class="prose book-blurb">{@html md(book.blurb)}</div>
 					{/if}
 					{#if book.links.length > 0}
 						<ul class="book-links" aria-label="Where to buy {book.title}">

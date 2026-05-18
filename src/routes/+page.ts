@@ -3,6 +3,8 @@ import {
 	getWritings,
 	getResume,
 	getAllPosts,
+	getProfile,
+	getSite,
 	hasBooks,
 	hasWritings,
 	hasResume,
@@ -13,8 +15,11 @@ export const prerender = true;
 
 export function load() {
 	const posts = getAllPosts();
+	const profile = getProfile();
+	const site = getSite();
 	return {
 		pageTitle: 'Home',
+		pageDescription: profile.tagline || site.description,
 		sections: {
 			books: hasBooks(getBooks()),
 			writings: hasWritings(getWritings()),

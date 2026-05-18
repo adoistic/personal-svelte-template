@@ -1,10 +1,15 @@
 import { error } from '@sveltejs/kit';
-import { getWritings, hasWritings } from '$lib/content';
+import { getWritings, getProfile, hasWritings } from '$lib/content';
 
 export const prerender = true;
 
 export function load() {
 	const writings = getWritings();
 	if (!hasWritings(writings)) throw error(404, 'Not found');
-	return { writings, pageTitle: 'Writings' };
+	const profile = getProfile();
+	return {
+		writings,
+		pageTitle: 'Writings',
+		pageDescription: `External essays, articles, and interviews by ${profile.name}.`
+	};
 }
