@@ -85,61 +85,101 @@ in the rendered HTML.
 Newsreader + IBM Plex setup), `tech` (mono + sans), `minimal` (system
 only). Each preset bundles its font choices and accent color recommendations.
 
-### Template variants — developer, designer, author
+### More section types — Skills, Projects, Portfolio, Case studies
 
-Right now the template is shaped for a writer/author. The structure
-(Profile → Books → Writings → Resume → Blog) makes sense for someone who
-publishes long-form work. For other professions, the same foundation should
-support different default sections.
+**Principle: sections are completely decoupled.** A developer with a
+novel out should be able to show Books AND Projects. A designer with
+academic credentials should be able to show Portfolio AND Resume. The
+auto-hide rule (a section appears only if its data file has content)
+already enforces this — there is no "variant switch" gating any
+section. The roadmap below treats each new section as a building block
+that any user can opt into, not as part of a profession-specific bundle.
 
-**Developer variant.** The default sections become:
+**Skills** — `content/skills.json`. Useful for everyone, not just
+developers (languages spoken, instruments played, technical specialties,
+materials, software fluency).
 
-- Profile → Skills (standalone) → Projects → Resume → Blog
-- "Skills" gets pulled out of `resume.json` into its own first-class section
-  (`content/skills.json`) and renders as a top-level page.
-- "Projects" becomes a folder collection (`content/projects/*.json`), with
-  fields for repo URL, demo URL, screenshots, tech stack, role.
-- Resume keeps everything else (work, education, certs).
-- Could integrate live data: GitHub contribution graph, latest npm packages,
-  star counts — opt-in via `site.json`.
+- Lift out of `resume.json` into its own file so it can render
+  independently. Resume still references it; backwards-compatible.
+- Renders at `/skills` as a standalone page.
+- Optionally also renders as a section on the home page, controlled by
+  `site.json` → `home_sections: ['skills', 'recent_posts', ...]`. The
+  home page becomes composable per-user.
 
-**Designer variant.** The default sections become:
+**Projects** — `content/projects/<slug>.json` (folder collection, one
+file per project).
 
-- Profile → Portfolio → Case studies → Clients → Blog
-- "Portfolio" is image-heavy: each project is a folder with a hero image,
-  a gallery, a short description. (`content/portfolio/<slug>/index.md` +
-  images alongside.)
-- "Case studies" are long-form posts about specific projects — same
-  structure as blog but visually distinct (larger images, less text).
-- "Clients" is a simple list of logos / names.
+- Fields: title, description (markdown), tech stack (array), role,
+  start/end date, repo URL, demo URL, screenshots.
+- Renders at `/projects` with a card layout (image + meta).
+- Equally useful for "open source projects I built" and "client work
+  I shipped" and "things I made on weekends."
 
-**The Skills section is portable.** Even non-developers benefit from it
-(languages spoken, instruments played, technical specialties). The plan is
-to make it a section that any variant can include:
+**Portfolio** — `content/portfolio/<slug>/` (folder per case study).
 
-- `content/skills.json` with a simple shape (`[{ name, level?, keywords[] }]`)
-- Auto-hides if empty, same as every other section
-- Can render on its own page (`/skills`) AND optionally as a section on the
-  home page (controlled by a `site.json` flag like `showSkillsOnHome: true`)
+- Image-heavy: each case study has a hero image, a gallery, a written
+  narrative.
+- Designed for visual work — design, photography, illustration,
+  architecture, anything where images carry the meaning.
+- Renders at `/portfolio` (grid index) and `/portfolio/<slug>` (detail).
+- Depends on the image-pipeline mid-term item shipping first so large
+  files don't tank load times.
 
-**Implementation plan:**
+**Case studies** — long-form writing about specific projects.
 
-- Step 1: Lift Skills out of `resume.json` into `content/skills.json`. Add
-  a `/skills` route. Backwards-compatible: if `skills.json` is missing,
-  read from `resume.json` as before.
-- Step 2: Add a `template_variant` field to `site.json` (`author` |
-  `developer` | `designer`). The build reads this to decide which seed
-  content shipping, which sections appear by default, and which Sveltia
-  collections are active.
-- Step 3: Build the developer variant's seed content. Document the
-  switch-variant workflow in CLAUDE.md so an LLM can scaffold a developer
-  site from "I'm a backend engineer working at X, here's my GitHub."
-- Step 4: Same for the designer variant. Image-handling is the harder
-  piece — designers will want large, optimized hero images, which depends
-  on the image-pipeline mid-term item shipping first.
+- Could simply be blog posts with a `category: case-study` frontmatter,
+  surfaced separately. Or its own folder if writers want a clean split
+  from the regular blog.
+- Decision deferred until users ask for it; the blog covers this for now.
 
-Each variant should share the same accessibility / SEO / OG / theme-toggle
-foundation. Only the default sections and seed content differ.
+### Mixing sections — composable home page
+
+The current home page renders bio + recent posts. With more section
+types, users will want different home-page compositions:
+
+- Author: bio + featured book + recent posts
+- Developer: bio + skills + featured project + recent posts
+- Designer: bio + portfolio grid + nothing else
+- Hybrid: bio + skills + books + recent posts (developer who also writes)
+
+Plan: `site.json` gains a `home_sections` array listing which section
+previews appear on the home page, in order. Each section preview is
+opt-in. Defaults match the current behavior (bio + recent posts).
+
+### Curated starting points (not architectural variants)
+
+To make scaffolding fast for common profiles, document _starting-point
+recipes_ in CLAUDE.md — not a `template_variant` field, just suggested
+prompts that an LLM can use to set up a coherent default for someone:
+
+- "Set me up as a writer" → populate profile + books + writings + resume,
+  leave projects/portfolio empty (auto-hide).
+- "Set me up as a developer" → populate profile + skills + projects +
+  resume, leave books/portfolio empty.
+- "Set me up as a designer" → populate profile + portfolio + case studies
+  - resume, leave books/projects empty.
+- "Set me up as a developer who also writes" → populate all of the above
+  except portfolio.
+
+The user can mix any of these later by adding files to other folders.
+Nothing is gated. This is the right shape because the underlying
+architecture is already section-by-section data-driven.
+
+### Implementation order
+
+1. **Skills** out of `resume.json` into `content/skills.json`. Add
+   `/skills` route with auto-hide. Backwards-compatible: if `skills.json`
+   is missing, read from `resume.json` as before.
+2. **Projects** as a folder collection. New `/projects` route. New
+   Sveltia collection in `config.yml`.
+3. **`home_sections` array** in `site.json` — composable home page.
+4. **Portfolio** — needs the image pipeline first, then layout work for
+   the image-heavy variant.
+5. **Starting-point recipes** documented in `CLAUDE.md` once sections 1-3
+   exist, so an LLM has the full toolkit when scaffolding.
+
+Each new section shares the same accessibility / SEO / OG / theme-toggle
+foundation. Only the data shape and the renderer differ.
 
 ## Far-term
 
