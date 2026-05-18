@@ -40,7 +40,7 @@ When editing existing code:
 
 When your changes create orphans:
 
-- Remove imports/variables/functions that *your* changes made unused.
+- Remove imports/variables/functions that _your_ changes made unused.
 - Don't remove pre-existing dead code unless asked.
 
 Test: every changed line should trace directly to the user's request.
@@ -90,7 +90,10 @@ A more detailed design doc lives outside the repo (in the maintainer's working n
 
 - **Accessibility is the design, not a checklist.** Real screen reader usability, keyboard navigation, semantic HTML, AAA body-text contrast (7:1+). Author-provided `alt` on every image. No JavaScript required to read any content.
 - **No animation, no scroll effects, no parallax, no carousels.** `prefers-reduced-motion` is the default behavior, not the exception.
-- **Auto-hide is data-driven, not config-driven.** A section renders only if its data file exists and has ≥1 entry. No `enable_books: true` flags. The hiding mechanism is `entries()` returning `[]` from `+page.ts` — one mechanism, not two.
+- **Auto-hide is data-driven, not config-driven.** A section renders only if its data file exists and has ≥1 entry. No `enable_books: true` flags. Hiding mechanism varies by route type:
+  - **Static routes** (e.g. `/books`, `/writings`, `/resume`, `/blog`): `+page.ts` calls `throw error(404)` when the predicate is false. With `prerender.handleHttpError: 'warn'`, the prerenderer skips the route — no `index.html` is generated. Direct nav falls through to adapter-static's `404.html` fallback.
+  - **Dynamic routes** (e.g. `/blog/[slug]`): `+page.ts` exports `entries()` returning the list of slugs to prerender. Drafts and missing posts are filtered out at this step.
+  - The nav (`lib/nav.ts`) uses the same per-section predicates from `lib/content.ts` so the link doesn't render either.
 - **Fluid responsive, not breakpoint-snapping.** `clamp()` for font sizes, line heights, container widths. One layout from 360px to 2560px.
 - **Premise 6 (JSON Resume):** the resume page uses the JSON Resume schema. Don't extend the schema for books/writings/speaking — those are separate files. JSON Resume is for work/education/skills/projects/certificates only.
 
@@ -121,5 +124,5 @@ bun run check            # svelte-check + tsc
 ### Branch + commit conventions
 
 - Branch off `main`. Branch names: `feat/...`, `fix/...`, `docs/...`, `chore/...`.
-- Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`). Subject line ≤72 chars. Body explains *why*, not *what*.
+- Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`). Subject line ≤72 chars. Body explains _why_, not _what_.
 - Squash on merge; PR title becomes the squash commit message.

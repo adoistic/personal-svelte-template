@@ -32,13 +32,13 @@ Other hosts (Vercel, Cloudflare Pages, GitHub Pages) work but require a one-time
 
 Through the admin UI:
 
-| Section | What it is | Auto-hides when |
-|---|---|---|
-| **Profile** | Name, bio, photo, social links | (always shown — required) |
-| **Books** | Your books, with covers, blurbs, and buy links | The list is empty |
-| **Writings** | External articles, essays, interviews — anything published elsewhere | The list is empty |
-| **Resume** | Career history, education, skills (JSON Resume schema) | All sections are empty |
-| **Blog** | Long-form posts, with optional cover images | No published posts |
+| Section      | What it is                                                           | Auto-hides when           |
+| ------------ | -------------------------------------------------------------------- | ------------------------- |
+| **Profile**  | Name, bio, photo, social links                                       | (always shown — required) |
+| **Books**    | Your books, with covers, blurbs, and buy links                       | The list is empty         |
+| **Writings** | External articles, essays, interviews — anything published elsewhere | The list is empty         |
+| **Resume**   | Career history, education, skills (JSON Resume schema)               | All sections are empty    |
+| **Blog**     | Long-form posts, with optional cover images                          | No published posts        |
 
 ## The LLM-powered resume import
 

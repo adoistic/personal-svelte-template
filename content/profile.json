@@ -1,0 +1,10 @@
+{
+	"name": "Your Name",
+	"tagline": "A short line about who you are",
+	"bio": "Replace this with your own bio. Two or three short paragraphs work best — say what you do, what you care about, and what you're working on right now. The bio is the only thing every visitor will read, so make it specific.\n\nThe template will auto-hide any section that has no content. If you don't have books, the Books page won't render. If you don't have a resume, no Resume link in the nav. The site shapes itself to whoever's using it.",
+	"photo": "/images/seed/avatar.svg",
+	"photoAlt": "Placeholder avatar — a simple geometric portrait outline",
+	"location": "",
+	"email": "",
+	"social": []
+}
